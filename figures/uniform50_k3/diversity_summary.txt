@@ -1,0 +1,3 @@
+sa/uniform: diversity_integral=0.150097 over 148 solutions
+nmc/uniform: diversity_integral=0.147143 over 150 solutions
+rlnmc/uniform: diversity_integral=0.144286 over 150 solutions

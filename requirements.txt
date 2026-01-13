@@ -1,0 +1,30 @@
+
+
+# Core scientific stack
+numpy>=1.23
+scipy>=1.10
+
+# Machine learning / deep learning
+torch>=2.0
+
+# Reinforcement Learning
+stable-baselines3>=2.1
+gymnasium>=0.28
+
+# Plotting and visualization
+matplotlib>=3.7
+
+# Graph utilities (used for diversity metrics)
+networkx>=3.1
+
+# Utilities
+pyyaml>=6.0
+tqdm>=4.66
+
+# Optional but recommended
+pandas>=2.0
+tensorboard>=2.15
+
+# Notes:
+# - Gurobi is NOT required (MIS is approximated greedily)
+# - PyTorch Geometric is NOT required (MLP policy used instead of GNN)

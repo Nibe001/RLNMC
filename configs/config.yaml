@@ -1,0 +1,125 @@
+
+
+# =============================================================
+# RLNMC Project – Global Configuration File
+# =============================================================
+# This file centralizes all hyperparameters used across:
+#   - instance generation
+#   - SA / NMC / RLNMC solvers
+#   - RL training (PPO)
+#   - experimental evaluation
+#
+# All scripts can either:
+#   (1) load this file directly, or
+#   (2) override any value via CLI arguments.
+# =============================================================
+
+# -------------------------------------------------------------
+# Reproducibility
+# -------------------------------------------------------------
+seed: 12345
+
+# -------------------------------------------------------------
+# Problem / Instance generation
+# -------------------------------------------------------------
+problem:
+  type: scalefree          # uniform | scalefree
+  n_vars: 250              # number of variables N
+  k: 4                     # k-SAT
+  clause_ratio: 9.2        # M / N
+  n_instances: 50          # number of instances for benchmarking
+
+  # scale-free parameters (used only if type=scalefree)
+  alpha: 2.6               # power-law exponent
+  b: null                  # alternative parameterization (overrides alpha if not null)
+
+  planted: true            # generate planted satisfiable instances
+  allow_duplicates: false # reject duplicate clauses
+
+# -------------------------------------------------------------
+# Simulated Annealing (SA)
+# -------------------------------------------------------------
+sa:
+  beta_start: 2.0          # initial inverse temperature
+  beta_end: 8.0            # final inverse temperature
+  max_sweeps: 10000        # default sweep budget (can be overridden)
+
+# -------------------------------------------------------------
+# Nonlocal Monte Carlo (NMC)
+# -------------------------------------------------------------
+nmc:
+  beta_nmc: 5.0            # temperature below which NMC is activated
+  backbone_threshold: 4.5  # |H_i| threshold for rigid variables
+
+  nmc_cycles: 3            # number of NMC cycles per jump
+  nmc_sweeps: 100          # sweeps used in relaxation / final optimization
+
+# -------------------------------------------------------------
+# RLNMC (Inference parameters)
+# -------------------------------------------------------------
+rlnmc:
+  deterministic_policy: true     # deterministic policy at test time
+  model_path: training/checkpoints/ppo_rlnmc_final.zip
+
+# -------------------------------------------------------------
+# Reinforcement Learning (Training – PPO)
+# -------------------------------------------------------------
+rl:
+  total_timesteps: 200000
+  n_envs: 8
+
+  # Episode structure
+  episode_nmc_steps: 50          # number of NMC jumps per episode
+
+  # SA warm-up before RL control
+  sa_warmup_sweeps: 3000
+
+  # PPO hyperparameters (stable-baselines3 defaults unless stated)
+  learning_rate: 3.0e-4
+  n_steps: 2048
+  batch_size: 64
+  n_epochs: 10
+
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.0
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+
+  device: auto               # auto | cpu | cuda
+
+# -------------------------------------------------------------
+# Experiment grid / evaluation
+# -------------------------------------------------------------
+experiments:
+  algorithms: [sa, nmc, rlnmc]
+
+  # sweep budgets tested for TTS curves
+  budgets: [200, 500, 1000, 2000, 5000, 10000]
+
+  replicas: 50               # independent runs per (instance, budget, algo)
+  target_energy: 0           # success threshold
+
+  save_energy_trace: true    # store best-energy traces (larger JSON)
+
+# -------------------------------------------------------------
+# Output paths
+# -------------------------------------------------------------
+paths:
+  instances: data/instances/
+  results: results/
+  figures: figures/
+  checkpoints: training/checkpoints/
+  tensorboard: training/tb/
+
+# -------------------------------------------------------------
+# Notes
+# -------------------------------------------------------------
+# - This config is designed to reproduce *qualitative trends* of the paper:
+#     RLNMC > NMC > SA on hard 4-SAT instances.
+# - For quick tests, reduce:
+#     * problem.n_vars
+#     * rl.total_timesteps
+#     * experiments.replicas
+# - For large-scale runs, consider GPU acceleration for PPO.
