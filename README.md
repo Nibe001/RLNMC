@@ -254,10 +254,10 @@ Possible improvements:
 
 ## 11. References
 
-> Dobrynin et al., *Nonlocal Monte Carlo via Reinforcement Learning*, 2025
-> Mohseni et al., *Nonequilibrium Nonlocal Monte Carlo*, 2023
-> Ansótegui et al., *Structure of Industrial SAT Instances*, IJCAI 2009
-> Friedrich et al., *Phase Transitions in Scale-Free SAT*, AAAI 2017
+- Dobrynin et al., *Nonlocal Monte Carlo via Reinforcement Learning*, 2025
+- Mohseni et al., *Nonequilibrium Nonlocal Monte Carlo*, 2023
+- Ansótegui et al., *Structure of Industrial SAT Instances*, IJCAI 2009
+- Friedrich et al., *Phase Transitions in Scale-Free SAT*, AAAI 2017
 
 ---
 
