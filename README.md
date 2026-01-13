@@ -1,6 +1,6 @@
 # RLNMC — Reinforcement Learning Nonlocal Monte Carlo for k-SAT
 
-This repository provides a **clean, modular, and fully reproducible implementation** of three heuristic solvers for hard combinatorial optimization problems, with a focus on **4-SAT / MAX-4-SAT**:
+This repository provides a **modular, and reproducible implementation** of three heuristic solvers for hard combinatorial optimization problems, with a focus on **4-SAT / MAX-4-SAT**:
 
 - **Simulated Annealing (SA)**
 - **Nonlocal Monte Carlo (NMC)**
