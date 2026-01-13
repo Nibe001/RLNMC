@@ -33,7 +33,6 @@ Notes
 
 - For MAX-k-SAT we minimize the number of unsatisfied clauses.
 
-Author: (your name)
 """
 
 from __future__ import annotations
