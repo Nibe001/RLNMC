@@ -212,11 +212,8 @@ Median (or mean) best-so-far energy above the optimum as a function of compute b
 
 ### Time-To-Solution (TTS_99)
 Estimated time required to reach 99% success probability:
-```
-$$
-\mathrm{TTS}_{99} = t \cdot \frac{\log(0.01)}{\log(1 - p_{\text{succ}})}
-$$
-```
+
+$$\mathrm{TTS}_{99} = t \cdot \frac{\log(0.01)}{\log(1 - p_{\text{succ}})}$$
 
 with confidence intervals (Wilson).
 
